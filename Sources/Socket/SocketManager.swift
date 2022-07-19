@@ -104,7 +104,6 @@ internal actor SocketManager {
     internal nonisolated func write(_ data: Data, for fileDescriptor: SocketDescriptor) async throws -> Int {
         guard let socket = await sockets[fileDescriptor] else {
             log("Unable to write unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             throw Errno.invalidArgument
         }
         // attempt to execute immediately
@@ -116,7 +115,6 @@ internal actor SocketManager {
     internal nonisolated func sendMessage(_ data: Data, for fileDescriptor: SocketDescriptor) async throws -> Int {
         guard let socket = await sockets[fileDescriptor] else {
             log("Unable to send message to unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             throw Errno.invalidArgument
         }
         // attempt to execute immediately
@@ -128,7 +126,6 @@ internal actor SocketManager {
     internal nonisolated func sendMessage<Address: SocketAddress>(_ data: Data, to address: Address,  for fileDescriptor: SocketDescriptor) async throws -> Int {
         guard let socket = await sockets[fileDescriptor] else {
             log("Unable to send message to unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             throw Errno.invalidArgument
         }
         // attempt to execute immediately
@@ -139,7 +136,6 @@ internal actor SocketManager {
     internal nonisolated func read(_ length: Int, for fileDescriptor: SocketDescriptor) async throws -> Data {
         guard let socket = await sockets[fileDescriptor] else {
             log("Unable to read unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             throw Errno.invalidArgument
         }
         // attempt to execute immediately
@@ -150,7 +146,6 @@ internal actor SocketManager {
     internal nonisolated func receiveMessage(_ length: Int, for fileDescriptor: SocketDescriptor) async throws -> Data {
         guard let socket = await sockets[fileDescriptor] else {
             log("Unable to receive message from unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             throw Errno.invalidArgument
         }
         // attempt to execute immediately
@@ -161,7 +156,6 @@ internal actor SocketManager {
     internal nonisolated func receiveMessage<Address: SocketAddress>(_ length: Int, fromAddressOf addressType: Address.Type = Address.self, for fileDescriptor: SocketDescriptor) async throws -> (Data, Address) {
         guard let socket = await sockets[fileDescriptor] else {
             log("Unable to receive message from unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             throw Errno.invalidArgument
         }
         // attempt to execute immediately
