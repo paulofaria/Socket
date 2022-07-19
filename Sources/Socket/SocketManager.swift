@@ -179,7 +179,6 @@ internal actor SocketManager {
     private nonisolated func wait(for event: FileEvents, fileDescriptor: SocketDescriptor) async throws {
         guard let socket = await sockets[fileDescriptor] else {
             log("Unable to wait for unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             throw Errno.invalidArgument
         }
         // poll immediately and try to read / write
