@@ -248,7 +248,6 @@ internal actor SocketManager {
     private func shouldRead(_ fileDescriptor: SocketDescriptor) async {
         guard let socket = self.sockets[fileDescriptor] else {
             log("Pending read for unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             return
         }
         // stop waiting
@@ -260,7 +259,6 @@ internal actor SocketManager {
     private func canWrite(_ fileDescriptor: SocketDescriptor) async {
         guard let socket = self.sockets[fileDescriptor] else {
             log("Can write for unknown socket \(fileDescriptor).")
-            assertionFailure("\(#function) Unknown socket \(fileDescriptor)")
             return
         }
         // stop waiting
